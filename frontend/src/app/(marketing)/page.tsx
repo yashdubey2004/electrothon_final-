@@ -50,7 +50,7 @@ export default function LandingPage() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-24">
-          <Link href="/dashboard" className="glass-pill-primary px-10 py-5 text-base font-black shadow-2xl shadow-primary/30 flex items-center gap-3 group">
+          <Link href="/login" className="glass-pill-primary px-10 py-5 text-base font-black shadow-2xl shadow-primary/30 flex items-center gap-3 group">
             Enter Executive Suite
             <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
           </Link>

@@ -57,7 +57,7 @@ export function AccountMenu() {
                         <p className="text-sm font-bold text-slate-800">CFO AI Monitor</p>
                     </div>
                     <button 
-                        onClick={() => setIsOpen(false)}
+                        onClick={() => navigateTo('/profile')}
                         className="w-full text-left px-5 py-3 text-sm font-bold text-slate-700 hover:bg-primary/5 hover:text-primary transition-all flex items-center gap-4"
                         role="menuitem"
                     >
