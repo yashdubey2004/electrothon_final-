@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export function AccountMenu() {
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -25,6 +27,11 @@ export function AccountMenu() {
         if (e.key === 'Escape') setIsOpen(false);
     };
 
+    const navigateTo = (path: string) => {
+        router.push(path);
+        setIsOpen(false);
+    };
+
     return (
         <div className="relative" ref={menuRef} onKeyDown={handleKeyDown}>
             <button 
@@ -42,29 +49,36 @@ export function AccountMenu() {
 
             {isOpen && (
                 <div 
-                    className="absolute right-0 mt-3 w-48 glass-panel rounded-2xl shadow-xl border border-white/40 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+                    className="absolute right-0 mt-3 w-56 bg-white/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 py-3 z-[100] animate-in fade-in slide-in-from-top-2 duration-200"
                     role="menu"
                 >
+                    <div className="px-4 py-2 border-b border-outline-variant/30 mb-2">
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Executive Session</p>
+                        <p className="text-sm font-bold text-slate-800">CFO AI Monitor</p>
+                    </div>
                     <button 
-                        className="w-full text-left px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3"
+                        onClick={() => setIsOpen(false)}
+                        className="w-full text-left px-5 py-3 text-sm font-bold text-slate-700 hover:bg-primary/5 hover:text-primary transition-all flex items-center gap-4"
                         role="menuitem"
                     >
-                        <span className="material-symbols-outlined text-lg">person</span>
+                        <span className="material-symbols-outlined text-xl opacity-60">person</span>
                         Profile
                     </button>
                     <button 
-                        className="w-full text-left px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3"
+                        onClick={() => navigateTo('/configuration')}
+                        className="w-full text-left px-5 py-3 text-sm font-bold text-slate-700 hover:bg-primary/5 hover:text-primary transition-all flex items-center gap-4"
                         role="menuitem"
                     >
-                        <span className="material-symbols-outlined text-lg">settings</span>
+                        <span className="material-symbols-outlined text-xl opacity-60">settings</span>
                         Settings
                     </button>
-                    <div className="h-[1px] bg-outline-variant/50 my-1 mx-2"></div>
+                    <div className="h-[1px] bg-outline-variant/30 my-2 mx-3"></div>
                     <button 
-                        className="w-full text-left px-4 py-2.5 text-sm font-semibold text-error hover:bg-error/5 transition-colors flex items-center gap-3"
+                        onClick={() => navigateTo('/login')}
+                        className="w-full text-left px-5 py-3 text-sm font-black text-error hover:bg-error/5 transition-all flex items-center gap-4"
                         role="menuitem"
                     >
-                        <span className="material-symbols-outlined text-lg">logout</span>
+                        <span className="material-symbols-outlined text-xl opacity-80">logout</span>
                         Logout
                     </button>
                 </div>

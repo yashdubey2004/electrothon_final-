@@ -7,7 +7,7 @@ export function Sidebar() {
     const pathname = usePathname();
 
     const menuItems = [
-        { name: 'Dashboard', href: '/', icon: 'dashboard' },
+        { name: 'Dashboard', href: '/dashboard', icon: 'dashboard' },
         { name: 'Data Pipeline', href: '/data-pipeline', icon: 'database' },
         { name: 'Risk Radar', href: '/risk-radar', icon: 'radar' },
         { name: 'War Room', href: '/war-room', icon: 'crisis_alert' },
@@ -45,7 +45,11 @@ export function Sidebar() {
                 })}
             </nav>
             <div className="p-4 border-t border-outline-variant space-y-1">
-                <Link className="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-white hover:shadow-sm transition-all" href="#">
+                <Link className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all ${
+                    pathname === '/configuration' 
+                    ? 'bg-primary/10 text-primary shadow-sm' 
+                    : 'text-on-surface-variant hover:bg-white hover:shadow-sm'
+                }`} href="/configuration">
                     <span className="material-symbols-outlined">settings</span>
                     <span className="font-medium">Settings</span>
                 </Link>
