@@ -1,6 +1,32 @@
-export default function DataPipelinePage() {
+"use client";
+
+import React, { useState, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import { inventoryFiles } from '@/lib/dummyData';
+
+export function DataPipeline() {
+    const router = useRouter();
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [isApplyingTags, setIsApplyingTags] = useState(false);
+
+    const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            console.log("File selected for Snowflake Cortex:", file.name);
+            alert(`File "${file.name}" selected for Snowflake Cortex Vectorization.`);
+        }
+    };
+
+    const handleAutoTags = async () => {
+        setIsApplyingTags(true);
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setIsApplyingTags(false);
+        alert("Tags Applied Successfully.");
+    };
+
     return (
-        <div className="flex-1 overflow-y-auto p-10 space-y-12 h-screen">
+        <div className="space-y-12">
             {/* Page Header */}
             <div className="max-w-6xl">
                 <h3 className="text-4xl font-headline font-bold text-on-surface mb-2 tracking-tight">Data Pipeline</h3>
@@ -11,7 +37,10 @@ export default function DataPipelinePage() {
             <div className="grid grid-cols-12 gap-8 max-w-7xl">
                 {/* Large Drag & Drop Zone */}
                 <div className="col-span-12 lg:col-span-8 group">
-                    <div className="h-[420px] glass-panel rounded-3xl relative flex flex-col items-center justify-center p-12 transition-all hover:shadow-xl hover:bg-white/80 cursor-pointer overflow-hidden">
+                    <div 
+                        className="h-[420px] glass-panel rounded-3xl relative flex flex-col items-center justify-center p-12 transition-all hover:shadow-xl hover:bg-white/80 cursor-pointer overflow-hidden"
+                        onClick={() => fileInputRef.current?.click()}
+                    >
                         {/* Background Texture */}
                         <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:24px_24px]"></div>
                         <div className="absolute inset-6 rounded-2xl border-2 border-dashed border-outline-variant group-hover:border-primary/40 transition-colors"></div>
@@ -27,6 +56,12 @@ export default function DataPipelinePage() {
                                 <span className="material-symbols-outlined text-xl">add</span>
                                 Select Local Files
                             </button>
+                            <input 
+                                type="file" 
+                                className="hidden" 
+                                ref={fileInputRef} 
+                                onChange={handleFileUpload} 
+                            />
                         </div>
                     </div>
                 </div>
@@ -95,101 +130,54 @@ export default function DataPipelinePage() {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-outline-variant">
-                                    <tr className="group hover:bg-white transition-colors">
-                                        <td className="px-8 py-6">
-                                            <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant">
-                                                    <span className="material-symbols-outlined">description</span>
+                                    {inventoryFiles.map((file) => (
+                                        <tr key={file.id} className="group hover:bg-white transition-colors">
+                                            <td className="px-8 py-6">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+                                                        <span className="material-symbols-outlined">
+                                                            {file.type === 'Structured' ? 'table_chart' : 'description'}
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <p className="font-bold text-on-surface">{file.name}</p>
+                                                        <p className="text-xs text-on-surface-variant">Uploaded {file.uploadTime} • {file.size}</p>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <p className="font-bold text-on-surface">EU_Contracts.pdf</p>
-                                                    <p className="text-xs text-on-surface-variant">Uploaded 2h ago • 4.2 MB</p>
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <span className="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant text-[11px] font-bold">{file.type}</span>
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <div className={`flex items-center gap-2 px-3 py-1 rounded-full w-fit text-[11px] font-bold border ${
+                                                    file.status === 'Vectorized' ? 'bg-secondary-container/50 text-on-secondary-container border-secondary/10' : 'bg-surface-container text-on-surface-variant border-outline-variant/30'
+                                                }`}>
+                                                    {file.status === 'Vectorized' ? (
+                                                        <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                                                    ) : (
+                                                        <span className="material-symbols-outlined text-[14px] animate-spin">sync</span>
+                                                    )}
+                                                    {file.status}
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <span className="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant text-[11px] font-bold">Unstructured</span>
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/50 text-on-secondary-container w-fit text-[11px] font-bold border border-secondary/10">
-                                                <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                                                Vectorized
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <div className="flex -space-x-2">
-                                                <div className="w-7 h-7 rounded-full border-2 border-white bg-primary-container flex items-center justify-center text-[10px] font-bold text-primary">C1</div>
-                                                <div className="w-7 h-7 rounded-full border-2 border-white bg-secondary-container flex items-center justify-center text-[10px] font-bold text-secondary">V2</div>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-6 text-right">
-                                            <button className="w-8 h-8 rounded-full hover:bg-surface-variant flex items-center justify-center text-outline">
-                                                <span className="material-symbols-outlined text-lg">more_vert</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr className="group hover:bg-white transition-colors">
-                                        <td className="px-8 py-6">
-                                            <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant">
-                                                    <span className="material-symbols-outlined">table_view</span>
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <div className="flex -space-x-2">
+                                                    {file.cortexTags.map((tag, idx) => (
+                                                        <div key={idx} className={`w-7 h-7 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold ${
+                                                            idx === 0 ? 'bg-primary-container text-primary' : 'bg-secondary-container text-secondary'
+                                                        }`}>
+                                                            {tag.substring(0, 2).toUpperCase()}
+                                                        </div>
+                                                    ))}
                                                 </div>
-                                                <div>
-                                                    <p className="font-bold text-on-surface">Q3_Sales.csv</p>
-                                                    <p className="text-xs text-on-surface-variant">Uploaded 5h ago • 12.8 MB</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <span className="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant text-[11px] font-bold">Structured</span>
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/50 text-on-secondary-container w-fit text-[11px] font-bold border border-secondary/10">
-                                                <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                                                Vectorized
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <div className="flex -space-x-2">
-                                                <div className="w-7 h-7 rounded-full border-2 border-white bg-primary-container flex items-center justify-center text-[10px] font-bold text-primary">C1</div>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-6 text-right">
-                                            <button className="w-8 h-8 rounded-full hover:bg-surface-variant flex items-center justify-center text-outline">
-                                                <span className="material-symbols-outlined text-lg">more_vert</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr className="group hover:bg-white transition-colors opacity-70">
-                                        <td className="px-8 py-6">
-                                            <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant">
-                                                    <span className="material-symbols-outlined">terminal</span>
-                                                </div>
-                                                <div>
-                                                    <p className="font-bold text-on-surface">System_Logs_Oct.log</p>
-                                                    <p className="text-xs text-on-surface-variant">Uploaded 1d ago • 840 KB</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <span className="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant text-[11px] font-bold">Semi-Structured</span>
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-surface-variant text-on-surface-variant w-fit text-[11px] font-bold border border-outline-variant/30">
-                                                <span className="material-symbols-outlined text-[14px]">pending</span>
-                                                Queued
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <span className="text-[10px] text-on-surface-variant italic">Awaiting Snowflake...</span>
-                                        </td>
-                                        <td className="px-8 py-6 text-right">
-                                            <button className="w-8 h-8 rounded-full hover:bg-surface-variant flex items-center justify-center text-outline">
-                                                <span className="material-symbols-outlined text-lg">more_vert</span>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td className="px-8 py-6 text-right">
+                                                <button className="w-8 h-8 rounded-full hover:bg-surface-variant flex items-center justify-center text-outline">
+                                                    <span className="material-symbols-outlined text-lg">more_vert</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
@@ -206,15 +194,19 @@ export default function DataPipelinePage() {
                         <p className="text-on-surface-variant text-sm mb-6 leading-relaxed">
                             Cortex AI detected a 12% improvement in retrieval accuracy by re-indexing <span className="font-bold text-on-surface">EU_Contracts.pdf</span> with specialized metadata tags.
                         </p>
-                        <button className="w-full py-3 bg-primary/10 hover:bg-primary/20 text-primary rounded-xl font-bold text-sm transition-all border border-primary/10">
-                            Apply Auto-Tags
+                        <button 
+                            className={`w-full py-3 ${isApplyingTags ? 'bg-slate-200' : 'bg-primary/10 hover:bg-primary/20'} text-primary rounded-xl font-bold text-sm transition-all border border-primary/10`}
+                            onClick={handleAutoTags}
+                            disabled={isApplyingTags}
+                        >
+                            {isApplyingTags ? 'Applying...' : 'Apply Auto-Tags'}
                         </button>
                     </div>
                 </div>
 
                 <div className="col-span-12 lg:col-span-8">
-                    <div className="glass-panel p-1 rounded-3xl relative h-[240px] overflow-hidden group">
-                        <img className="w-full h-full object-cover rounded-[22px] opacity-40 mix-blend-multiply group-hover:scale-105 transition-transform duration-700" alt="Abstract data visualization with flowing cyan and indigo lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzfI12MXsZ97ahnVugFB8Eg2cQ3kCYdopwREcNrtYA1f5KfgAfipj85V1uLWOXn6-fpARR8W5YF1ww6L7izYrlvkQdc2KQMjIGK-Pm7txA3OfXGAm75nhX0bKhqYEIqeGjsLHtPKH7ZWxeke04QmF6LPUrJ5zAhc1XN_B_RHHPvdMiJxvVmTOvpaJedMIdPUq6Uj9nVIf75FOrqvI088AGOyW0V9PZn5oHFBHLenuuvglEHpihQsn8hFndgpdvD7kXNaqz-Dcej-zk"/>
+                    <div className="glass-panel p-1 rounded-3xl relative h-[240px] overflow-hidden group border border-white/40 shadow-sm">
+                        <img className="w-full h-full object-cover rounded-[22px] opacity-40 mix-blend-multiply group-hover:scale-105 transition-transform duration-700" alt="Data Visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzfI12MXsZ97ahnVugFB8Eg2cQ3kCYdopwREcNrtYA1f5KfgAfipj85V1uLWOXn6-fpARR8W5YF1ww6L7izYrlvkQdc2KQMjIGK-Pm7txA3OfXGAm75nhX0bKhqYEIqeGjsLHtPKH7ZWxeke04QmF6LPUrJ5zAhc1XN_B_RHHPvdMiJxvVmTOvpaJedMIdPUq6Uj9nVIf75FOrqvI088AGOyW0V9PZn5oHFBHLenuuvglEHpihQsn8hFndgpdvD7kXNaqz-Dcej-zk"/>
                         <div className="absolute inset-0 p-10 flex flex-col justify-end">
                             <div className="flex justify-between items-end">
                                 <div>
@@ -231,9 +223,12 @@ export default function DataPipelinePage() {
                 </div>
             </div>
 
-            {/* Floating Insight Rail */}
+            {/* Floating FAB */}
             <div className="fixed right-6 bottom-6 flex flex-col gap-4">
-                <button className="w-14 h-14 primary-gradient text-white rounded-2xl flex items-center justify-center shadow-2xl shadow-primary/40 hover:scale-110 transition-transform active:scale-95">
+                <button 
+                    onClick={() => router.push('/war-room')}
+                    className="w-14 h-14 primary-gradient text-white rounded-2xl flex items-center justify-center shadow-2xl shadow-primary/40 hover:scale-110 transition-transform active:scale-95"
+                >
                     <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
                 </button>
             </div>
