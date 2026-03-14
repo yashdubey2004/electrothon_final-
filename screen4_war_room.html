@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#fdfdff",
+              "on-background": "#0f172a",
+              "primary": "#6366f1",
+              "on-primary": "#ffffff",
+              "primary-container": "#e0e7ff",
+              "on-primary-container": "#312e81",
+              "secondary": "#64748b",
+              "on-secondary": "#ffffff",
+              "secondary-container": "#f1f5f9",
+              "on-secondary-container": "#1e293b",
+              "tertiary": "#f43f5e",
+              "on-tertiary": "#ffffff",
+              "tertiary-container": "#ffe4e6",
+              "on-tertiary-container": "#9f1239",
+              "surface": "#ffffff",
+              "on-surface": "#0f172a",
+              "surface-variant": "#f1f5f9",
+              "on-surface-variant": "#475569",
+              "outline": "#cbd5e1",
+              "outline-variant": "#e2e8f0",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-low": "#f8fafc",
+              "surface-container": "#f1f5f9",
+              "surface-container-high": "#e2e8f0",
+              "surface-container-highest": "#cbd5e1"
+            },
+            fontFamily: {
+              "headline": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "2xl": "1.5rem", "3xl": "2rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+      .glass-pill-primary {
+        background: rgba(99, 102, 241, 0.08);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(99, 102, 241, 0.15);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+      }
+      .pulsing-ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 1px solid rgba(99, 102, 241, 0.15);
+        background: rgba(99, 102, 241, 0.02);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(99, 102, 241, 0.1);
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="h-16 flex items-center justify-between px-8 bg-surface-container-lowest border-b border-outline-variant/30 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<span class="text-lg font-bold tracking-tight text-primary">AI-COO Executive Suite</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/50">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs text-on-surface-variant font-medium">Status: Snowflake Cortex Connected</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">calendar_today</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors relative">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 w-1.5 h-1.5 bg-tertiary rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/50">
+<img alt="Executive User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqbl-hXIL3rTMxWMl52aMCFdGAKYmVeQShUZ2o2hLIGDR2uzszDIAfL7Wv_da0h-OOCLgJw2oeqcu9Z5yGcRmd9TIztOiQtKPKDv3S8tKTcRYczG1KVzcSoae4IJJq3fXWLMvcQbdZzHObtO2QvdrHhP4S7iLBWSSJdgKMuLgiXv43hLbSSJwrSyyQb9U2jajdic_SJSd60NWgzi7-W5F5UJZ3cuUo7zSOfz0SVbGGtE9Vmz9GcuSpdm4OpNiJS3TqPLpzDYs0xhDj"/>
+</div>
+</div>
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-64 bg-surface-container-low border-r border-outline-variant/30 flex flex-col p-4 gap-2">
+<div class="px-4 py-6 mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white font-bold shadow-lg shadow-primary/20">AI</div>
+<div>
+<div class="text-lg font-bold leading-tight">AI-COO</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest font-semibold">Enterprise Intelligence</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">database</span>
+<span class="text-sm font-medium">Data Pipeline</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">radar</span>
+<span class="text-sm font-medium">Risk Radar</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-on-primary shadow-lg shadow-primary/20 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">crisis_alert</span>
+<span class="text-sm font-bold">War Room</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-sm font-medium">The Boardroom</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant/30 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm font-medium">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 relative overflow-hidden flex flex-col">
+<!-- Background Gradient Elements -->
+<div class="absolute inset-0 bg-gradient-to-br from-surface to-surface-container-low pointer-events-none"></div>
+<div class="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute bottom-[-5%] left-[-2%] w-[400px] h-[400px] bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Page Content -->
+<div class="relative z-10 flex-1 flex flex-col p-8 overflow-hidden">
+<header class="mb-10 ml-4">
+<h1 class="text-3xl font-black tracking-tight text-on-surface">War Room</h1>
+<p class="text-base text-on-surface-variant font-medium">Active Neural Voice Uplink</p>
+</header>
+<div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 overflow-hidden">
+<!-- Left: Interaction Zone -->
+<div class="flex flex-col items-center justify-center relative">
+<!-- Pulse Rings -->
+<div class="absolute w-[450px] h-[450px] pulsing-ring scale-100 opacity-30"></div>
+<div class="absolute w-[350px] h-[350px] pulsing-ring scale-100 opacity-50"></div>
+<div class="absolute w-[250px] h-[250px] pulsing-ring scale-100 opacity-70"></div>
+<!-- Main Mic Button -->
+<button class="relative z-10 w-44 h-44 rounded-full glass-card shadow-2xl shadow-primary/10 flex items-center justify-center group transition-transform hover:scale-105 active:scale-95 border border-primary/20">
+<div class="w-36 h-36 rounded-full bg-gradient-to-tr from-primary to-primary-container flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white text-5xl" style="font-variation-settings: 'FILL' 1;">mic</span>
+</div>
+</button>
+<div class="mt-16 text-center space-y-4">
+<div class="inline-flex items-center gap-2 px-6 py-2 rounded-full glass-card border border-primary/10">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
+<span class="text-sm font-semibold tracking-wide text-primary">Querying Snowflake Vector Store...</span>
+</div>
+<p class="text-on-surface-variant text-[11px] font-bold tracking-[0.2em] uppercase opacity-60">Holding for voice command</p>
+</div>
+<!-- Refined Hardware Accents -->
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
+<div class="w-8 h-1 bg-secondary opacity-20 rounded-full"></div>
+<div class="w-8 h-1 bg-secondary opacity-60 rounded-full"></div>
+<div class="w-8 h-1 bg-secondary opacity-20 rounded-full"></div>
+</div>
+</div>
+<!-- Right: Scrolling Transcript -->
+<div class="glass-card rounded-3xl flex flex-col overflow-hidden border border-white/60 shadow-xl">
+<div class="px-8 py-5 border-b border-outline-variant/30 flex justify-between items-center bg-white/20">
+<h3 class="font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">forum</span>
+                            Session Transcript
+                        </h3>
+<span class="text-[10px] font-black text-on-surface-variant bg-surface-container-high px-2.5 py-1 rounded-md border border-outline-variant/50 tracking-wider">LIVE</span>
+</div>
+<div class="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar">
+<!-- User Message -->
+<div class="flex flex-col items-end gap-2 max-w-[90%] ml-auto">
+<div class="glass-pill-primary p-5 rounded-2xl rounded-tr-none text-on-surface">
+<p class="text-sm leading-relaxed">Analyze our Q3 inventory risk against the projected West Coast logistics disruption. Is Snowflake flagging any critical anomalies in the supplier vector space?</p>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50">Executive User • 10:42 AM</span>
+</div>
+<!-- AI Message -->
+<div class="flex flex-col items-start gap-2 max-w-[90%]">
+<div class="bg-white/80 border border-outline-variant/40 p-5 rounded-2xl rounded-tl-none text-on-surface shadow-sm">
+<p class="text-sm leading-relaxed">Processing Query against Snowflake Cortex... <br/><br/>I've identified a <span class="font-bold text-primary">12.4% variance</span> in lead times for Tier-1 electronics suppliers. The vector embeddings show a significant semantic shift in 'logistics_reliability' scores for regional hubs. Current risk rating is <span class="text-tertiary font-bold">CRITICAL</span>.</p>
+<!-- Insight Card within chat -->
+<div class="mt-5 p-4 rounded-xl bg-primary-container/30 border border-primary/10 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<div>
+<p class="text-[10px] font-black uppercase tracking-wider text-primary">Action Suggested</p>
+<p class="text-sm font-medium text-on-primary-container">Re-route shipments via Port of Houston</p>
+</div>
+</div>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary/60">AI-COO Intelligence • 10:42 AM</span>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end gap-2 max-w-[90%] ml-auto">
+<div class="glass-pill-primary p-5 rounded-2xl rounded-tr-none text-on-surface">
+<p class="text-sm leading-relaxed">Initiate the reroute simulation and notify the logistics VP. Include the cost-benefit delta from the Cortex analysis.</p>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50">Executive User • 10:43 AM</span>
+</div>
+<!-- AI Message (Typing) -->
+<div class="flex flex-col items-start gap-2">
+<div class="bg-white/80 border border-outline-variant/40 px-5 py-4 rounded-2xl rounded-tl-none flex gap-1.5">
+<div class="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce"></div>
+<div class="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+<div class="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+</div>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="p-6 bg-white/40 border-t border-outline-variant/30">
+<div class="relative">
+<input class="w-full bg-white/60 border border-outline-variant/50 rounded-2xl py-4 px-6 focus:ring-2 focus:ring-primary/20 focus:border-primary/30 placeholder:text-on-surface-variant/40 text-sm transition-all outline-none" placeholder="Type command or press mic..." type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-2">
+<button class="p-2 rounded-xl bg-primary text-white hover:bg-primary/90 transition-colors shadow-md">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Quick Stats -->
+<div class="mt-8 flex justify-between items-center px-4">
+<div class="flex gap-12">
+<div class="flex flex-col">
+<span class="text-[10px] font-black uppercase tracking-[0.15em] text-on-surface-variant/40">Latency</span>
+<span class="text-lg font-bold text-on-surface/50">12ms</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] font-black uppercase tracking-[0.15em] text-on-surface-variant/40">Vector Dims</span>
+<span class="text-lg font-bold text-on-surface/50">1536</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] font-black uppercase tracking-[0.15em] text-on-surface-variant/40">Model</span>
+<span class="text-lg font-bold text-on-surface/50">Cortex-L</span>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 text-[11px] font-black tracking-widest text-on-surface-variant/50 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        EXPORT LOGS
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Interaction Rail -->
+<div class="fixed right-6 top-24 w-12 flex flex-col gap-4 z-40">
+<button class="w-12 h-12 rounded-xl glass-card border border-white/60 flex items-center justify-center text-primary shadow-lg hover:bg-white transition-all group relative">
+<span class="material-symbols-outlined">bolt</span>
+<div class="absolute right-14 bg-on-surface text-white text-[10px] px-2.5 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-bold tracking-wider pointer-events-none">FLASH INSIGHTS</div>
+</button>
+<button class="w-12 h-12 rounded-xl glass-card border border-white/60 flex items-center justify-center text-secondary shadow-lg hover:bg-white transition-all group relative">
+<span class="material-symbols-outlined">architecture</span>
+<div class="absolute right-14 bg-on-surface text-white text-[10px] px-2.5 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-bold tracking-wider pointer-events-none">NODE VIEW</div>
+</button>
+</div>
+</body></html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              // Based on Luminous Prism #6366f1
+              "background": "#fbfbfe",
+              "on-background": "#0f172a",
+              "primary": "#6366f1",
+              "on-primary": "#ffffff",
+              "primary-container": "#eef2ff",
+              "on-primary-container": "#4338ca",
+              "secondary": "#475569", // Slate for professional gray
+              "on-secondary": "#ffffff",
+              "secondary-container": "#f1f5f9",
+              "on-secondary-container": "#334155",
+              "tertiary": "#8b5cf6", // Violet accent
+              "on-tertiary": "#ffffff",
+              "tertiary-container": "#f5f3ff",
+              "on-tertiary-container": "#6d28d9",
+              "error": "#ef4444",
+              "error-container": "#fef2f2",
+              "on-error-container": "#991b1b",
+              "surface": "#ffffff",
+              "surface-variant": "#f8fafc",
+              "outline": "#e2e8f0",
+              "outline-variant": "#cbd5e1",
+              "on-surface": "#1e293b",
+              "on-surface-variant": "#64748b"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "2xl": "1.5rem",
+              "3xl": "2rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #fbfbfe; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .bg-gradient-mesh {
+            background-color: #fbfbfe;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(243, 75%, 66%, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(262, 83%, 58%, 0.05) 0px, transparent 50%);
+        }
+        .alert-glow {
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.08);
+        }
+        .sidebar-active {
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 100%);
+            border-left: 3px solid #6366f1;
+        }
+    </style>
+</head>
+<body class="bg-gradient-mesh text-on-surface min-h-screen">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 glass-card px-8 py-3 flex items-center justify-between border-b">
+<div class="flex items-center gap-6">
+<span class="text-xl font-extrabold tracking-tight text-primary">AI-COO <span class="text-on-surface/40 font-normal ml-1">Executive</span></span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center bg-secondary-container px-4 py-1.5 rounded-full border border-outline/50">
+<div class="w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse"></div>
+<span class="text-xs text-on-secondary-container font-semibold">Snowflake Cortex Connected</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">calendar_today</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<div class="h-9 w-9 rounded-full bg-primary-container p-0.5 border border-primary/20">
+<img alt="Executive User Profile" class="h-full w-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfdsB_zh19axNCEl1m7Ygorqc7HS1QJI_mVLnIQnxz9WN4o_zwiON5o5RVXEkvNVAiHGzs2ItD1cvac9f5jp5t7NHTznK8neWm9RzwF5o3IvkNfghdL_6xT3zOLQx0j49Sp70QwUpmAPfCLElfz10q_-yUo-Z_4Em-_Kf9l6KqqtmoEGkrV0-4DGM9E35u4IFp46WlS_b-NOq5Ay-ybz_YoEGJfYq9380QEDlh63D_uPUZwrZylQKkoCF_U4PUQIaIkTZFEY3rp4mf"/>
+</div>
+</div>
+</div>
+</nav>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="w-72 h-[calc(100vh-64px)] sticky top-[64px] px-6 py-8 flex flex-col justify-between border-r border-outline/30 bg-white/30">
+<div>
+<div class="flex items-center gap-3 mb-12 px-2">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div>
+<div class="text-on-surface font-bold text-lg leading-tight">AI-COO</div>
+<div class="text-on-surface-variant text-xs font-semibold tracking-wide uppercase opacity-70">Intelligence</div>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-primary-container/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-primary-container/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">database</span>
+<span class="text-sm font-semibold">Data Pipeline</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 sidebar-active text-primary rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">radar</span>
+<span class="text-sm font-bold">Risk Radar</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-primary-container/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">crisis_alert</span>
+<span class="text-sm font-semibold">War Room</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-primary-container/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-sm font-semibold">The Boardroom</span>
+</a>
+</nav>
+</div>
+<div class="space-y-1 border-t border-outline/50 pt-6">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-primary-container/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-semibold">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-primary-container/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm font-semibold">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-10 space-y-10">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row justify-between items-start gap-6">
+<div>
+<h1 class="text-4xl font-extrabold tracking-tight text-on-surface mb-2">Predictive Risk Radar</h1>
+<p class="text-on-surface-variant text-lg max-w-xl font-medium opacity-80">Algorithmic threat detection and revenue simulations powered by Cortex ML.</p>
+</div>
+<div class="flex gap-4">
+<div class="glass-card px-6 py-4 rounded-2xl flex flex-col border-l-4 border-l-error shadow-sm">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest mb-1 opacity-70">Global Risk Index</span>
+<span class="text-2xl font-black text-error">Elevated (7.4)</span>
+</div>
+</div>
+</header>
+<!-- Revenue Forecast Chart Section -->
+<section class="grid grid-cols-12 gap-6">
+<div class="col-span-12 glass-card rounded-3xl p-8 min-h-[500px] relative overflow-hidden shadow-xl shadow-primary/5">
+<div class="flex justify-between items-center mb-12">
+<div>
+<h3 class="text-xl font-bold text-on-surface">Revenue Forecast Simulation</h3>
+<p class="text-on-surface-variant text-sm font-medium opacity-70">Historical Actuals vs. 45-Day AI Projection</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary shadow-sm shadow-primary/40"></div>
+<span class="text-xs font-bold text-on-surface-variant">Actuals</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full border-2 border-dashed border-error"></div>
+<span class="text-xs font-bold text-on-surface-variant">Forecasted Volatility</span>
+</div>
+</div>
+</div>
+<!-- Simulated Recharts AreaChart -->
+<div class="relative w-full h-80 px-4">
+<svg class="w-full h-full overflow-visible" viewbox="0 0 1000 300">
+<defs>
+<lineargradient id="areaPrimary" x1="0" x2="0" y1="0" y2="1">
+<stop offset="5%" stop-color="#6366f1" stop-opacity="0.25"></stop>
+<stop offset="95%" stop-color="#6366f1" stop-opacity="0"></stop>
+</lineargradient>
+<lineargradient id="areaWarning" x1="0" x2="0" y1="0" y2="1">
+<stop offset="5%" stop-color="#ef4444" stop-opacity="0.15"></stop>
+<stop offset="95%" stop-color="#ef4444" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Lines -->
+<line stroke="#f1f5f9" stroke-width="1" x1="0" x2="1000" y1="0" y2="0"></line>
+<line stroke="#f1f5f9" stroke-width="1" x1="0" x2="1000" y1="75" y2="75"></line>
+<line stroke="#f1f5f9" stroke-width="1" x1="0" x2="1000" y1="150" y2="150"></line>
+<line stroke="#f1f5f9" stroke-width="1" x1="0" x2="1000" y1="225" y2="225"></line>
+<line stroke="#f1f5f9" stroke-width="1" x1="0" x2="1000" y1="300" y2="300"></line>
+<!-- Historical Solid Blue Line -->
+<path d="M0,150 Q100,140 200,160 T400,130 T600,145" fill="none" stroke="#6366f1" stroke-linecap="round" stroke-width="3"></path>
+<path d="M0,150 Q100,140 200,160 T400,130 T600,145 L600,300 L0,300 Z" fill="url(#areaPrimary)"></path>
+<!-- 45-day Dashed Red Line Dip (Projection) -->
+<path d="M600,145 Q700,160 800,260 T1000,220" fill="none" stroke="#ef4444" stroke-dasharray="8,4" stroke-linecap="round" stroke-width="3"></path>
+<path d="M600,145 Q700,160 800,260 T1000,220 L1000,300 L600,300 Z" fill="url(#areaWarning)"></path>
+<!-- Critical Point Pulse -->
+<circle cx="800" cy="260" fill="#ef4444" r="6"></circle>
+<circle class="animate-ping" cx="800" cy="260" fill="#ef4444" opacity="0.3" r="12"></circle>
+</svg>
+<!-- X-Axis Labels -->
+<div class="flex justify-between mt-8 text-[11px] font-bold text-on-surface-variant px-2 tracking-wider opacity-60">
+<span>JAN</span><span>FEB</span><span>MAR</span><span>APR</span><span class="text-error opacity-100">MAY (FORECAST)</span><span>JUN</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Red Alert Banner -->
+<div class="col-span-12 alert-glow bg-error-container/50 border border-error/20 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 transition-all hover:bg-error-container/70">
+<div class="flex items-center gap-6">
+<div class="w-14 h-14 bg-error rounded-full flex items-center justify-center shadow-lg shadow-error/20">
+<span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<h4 class="text-xl font-bold text-on-error-container">Projected $500k Loss in EU Region</h4>
+<p class="text-on-surface-variant font-medium text-sm">Anomaly detected in supply chain logistics and energy surcharges.</p>
+</div>
+</div>
+<button class="bg-primary text-white px-8 py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all flex items-center gap-3 active:scale-95">
+<span class="material-symbols-outlined text-lg">auto_awesome</span>
+                Generate Mitigation Strategy
+            </button>
+</div>
+<!-- Insight Cards (Bottom Row) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 pb-20">
+<!-- Professional Slate Card 1 -->
+<div class="glass-card rounded-3xl p-8 border-t-4 border-t-primary shadow-sm hover:shadow-md transition-all">
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 bg-primary-container rounded-2xl">
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<span class="text-[10px] font-bold text-primary bg-primary-container px-3 py-1 rounded-full uppercase tracking-tighter">Regional Shift</span>
+</div>
+<h5 class="text-lg font-bold mb-2 text-on-surface">EU Market Volatility</h5>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 font-medium opacity-80">Historical trends suggest a 12% correction cycle. ML model predicts stabilization by late Q3.</p>
+<div class="h-1.5 w-full bg-secondary-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full"></div>
+</div>
+</div>
+<!-- Professional Slate Card 2 -->
+<div class="glass-card rounded-3xl p-8 border-t-4 border-t-tertiary shadow-sm hover:shadow-md transition-all">
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 bg-tertiary-container rounded-2xl">
+<span class="material-symbols-outlined text-tertiary">finance</span>
+</div>
+<span class="text-[10px] font-bold text-tertiary bg-tertiary-container px-3 py-1 rounded-full uppercase tracking-tighter">Fiscal Impact</span>
+</div>
+<h5 class="text-lg font-bold mb-2 text-on-surface">Cost Optimization</h5>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 font-medium opacity-80">AI recommends immediate reallocation of $250k from R&amp;D to direct logistics support.</p>
+<div class="flex items-center gap-2 text-primary font-bold text-xs cursor-pointer hover:gap-3 transition-all">
+                    Review Recommendations <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</div>
+</div>
+<!-- Professional Slate Card 3 -->
+<div class="glass-card rounded-3xl p-8 border-t-4 border-t-secondary shadow-sm hover:shadow-md transition-all">
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 bg-secondary-container rounded-2xl">
+<span class="material-symbols-outlined text-secondary">hub</span>
+</div>
+<span class="text-[10px] font-bold text-secondary bg-secondary-container px-3 py-1 rounded-full uppercase tracking-tighter">Network Health</span>
+</div>
+<h5 class="text-lg font-bold mb-2 text-on-surface">Supply Chain Integrity</h5>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 font-medium opacity-80">Snowflake Cortex signals potential delays in Rotterdam hub operations within 15 days.</p>
+<div class="flex -space-x-2">
+<img alt="Logistics Manager Profile" class="w-8 h-8 rounded-full border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXTN8Nnj7AS0kp9s-7KsZgvvc1dyAiqKBQbdeOC7Hd6iUAqRn5uf_8xeYrHj7Sb74EajFEfJoHcOoAKNfTpMuJl4KkCckjc62-Vtht4IZzUGFsO0sVmUhvd6xOhF1J06_Zlnvx0Zq7vpwGuxbBOM17swRi6l50ylm_3qGNWuamydadQD6pFlhq0UzHK_n3DLfXY4GfTKPMtV7qep0FPxbdVs1msrc3fKT_DPVEiO3d31M7A3cDIHTw8OUqQEXaNGiyiv5ajlcW12Hb"/>
+<img alt="Operations Director Profile" class="w-8 h-8 rounded-full border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrELAoVRWakfuMsdo9ClJionUKGAms5otantQaHbo9JcssAnjjvQB0TcTPsUOh4CtLwFt0z5QDbMgQw83_7qgzGKC1raE2rJhCTljGrBgWp0f9ibp0NYESynBo8haMXIsK4OPSsWfTY72H1q8tMH0j9x-GB4q9s8asaVHjxVOvfvyIzqa_x1mbGMRYlIHVnq8BtHhkU8pCPK5ATKBrsTtNthplNTCaGgk1DuBohnotMXBi5k26B8DN2xPuLd0nI94zKd3WaBjDd7cX"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-secondary text-[10px] font-bold text-white flex items-center justify-center">+4</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- The Insight Rail (Floating Signature Component) -->
+<div class="fixed bottom-8 right-8 w-80 glass-card rounded-3xl p-6 shadow-2xl border-primary/10 border-t-4 border-t-primary">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="text-[11px] font-extrabold text-on-surface uppercase tracking-widest opacity-80">Live Context</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-5 font-medium">
+        Snowflake Cortex is analyzing 4,200 additional variables from the <span class="text-primary font-bold">War Room</span> data stream.
+    </p>
+<div class="bg-primary-container/60 p-4 rounded-2xl border border-primary/10">
+<span class="text-[10px] font-extrabold text-primary uppercase tracking-wider">NEXT RECOMMENDED STEP</span>
+<p class="text-sm font-bold mt-1.5 text-on-primary-container">Schedule Emergency Board Meeting</p>
+</div>
+</div>
+</body></html>
