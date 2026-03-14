@@ -13,7 +13,7 @@ export function Sidebar() {
                 </div>
             </div>
             <nav className="flex-1 px-4 mt-4 space-y-1">
-                <Link className="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-white hover:shadow-sm transition-all" href="/dashboard">
+                <Link className="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-white hover:shadow-sm transition-all" href="/">
                     <span className="material-symbols-outlined">dashboard</span>
                     <span className="font-medium">Dashboard</span>
                 </Link>
